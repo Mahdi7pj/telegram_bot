@@ -13,7 +13,7 @@ bot.help((ctx)=>{
 const PORT = process.env.PORT || 3000; // Render پورت را در process.env.PORT قرار می‌دهد
 
 // URL واقعی سرویس Render شما که خودتان ارسال کردید:
-const WEBHOOK_URL = https://telegram-bot-v8u3.onrender.com/; 
+const WEBHOOK_URL = 'https://telegram-bot-v8u3.onrender.com/'; 
 
 // راه‌اندازی ربات در حالت وب‌هوک
 bot.launch({
