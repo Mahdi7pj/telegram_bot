@@ -13,6 +13,7 @@ ctx.reply("سلام به ربات فروشگاهی ما خوش آمدید",{
   reply_markup : {
     inline_keyboard: [
       [ { text:"ادرس فروشگاه" , callback_data:"btn-1"} , { text:"آدرس سایت" , callback_data:"btn-2"}]
+      [{ text:"ارتباط با ادمین", callback_data:"btn-last"}]
     ]
   }
 })
