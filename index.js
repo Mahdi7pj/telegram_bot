@@ -1,7 +1,7 @@
 const { Telegraf } = require('telegraf');
 const { inlineKeyboard } = require('telegraf/markup');
 
-const bot =new Telegraf(process.env.bot_token);
+
 
 bot.start((ctx) =>{
     ctx.reply('سلام به ربات فروشگاه mahdi7pj  خوش آمدید \n چه کمکی از من برمیاد\n /help')
@@ -55,7 +55,7 @@ const { Telegraf } = require('telegraf');
 const PORT = process.env.PORT || 3000; // مطمئن شوید که این خط وجود دارد و به درستی تعریف شده است
 
 const WEBHOOK_URL = 'https://telegram-bot-v8u3.onrender.com'; // در اینجا نیازی به اسلش انتهایی نیست، Telegraf در صورت نیاز با مسیر آن را اضافه می‌کند
-const bot = new Telegraf(process.env.BOT_TOKEN); // مطمئن شوید که BOT_TOKEN به درستی بارگذاری شده است
+const bot = new Telegraf(process.env.bot_token); // مطمئن شوید که BOT_TOKEN به درستی بارگذاری شده است
 
 // هندلرهای ربات شما (bot.start, bot.help و غیره) در اینجا قرار می‌گیرند
 
