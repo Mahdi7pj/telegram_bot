@@ -1,4 +1,5 @@
-const { Telegraf } = require('telegraf')
+const { Telegraf } = require('telegraf');
+const { inlineKeyboard } = require('telegraf/markup');
 
 const bot =new Telegraf(process.env.bot_token);
 
@@ -13,8 +14,9 @@ ctx.reply("🎉سلام به ربات فروشگاهی ما خوش آمدید",{
   reply_markup : {
     inline_keyboard: [
       [ { text:"🛒ادرس فروشگاه" , callback_data:"btn-1"} , { text:"🌐آدرس سایت" , callback_data:"btn-2"}],
-      [{ text:"👨‍💻ارتباط با ادمین", callback_data:"btn-3"}],
-      [{text:"آدرس کانال تلگرامی ما ",callback_data:"btn-4"}]
+      [{ text:"👨‍💻ارتباط با ادمین", callback_data:"btn-3"},{text:"آدرس کانال تلگرامی ما ",callback_data:"btn-4"}]
+      [{text:"کمک نیاز دارم",callback_data:"btn-5"}]
+
     ]
   }
 })
@@ -31,6 +33,21 @@ bot.action("btn-3",(ctx)=>{
 })
 bot.action("btn-4",(ctx)=>{
   ctx.reply("@")
+})
+bot.action("btn-5",(ctx)=>{
+  ctx.reply("چه کمکی ز دستم برمیاد"),{
+    reply_markup:{
+      inline_keyboard:[
+        [{text:"درباره ما",callback_data:"btn-6"},{text:"ارتباط با پشتیبانی",callback_data:"btn-7"}]
+      ]
+    }
+  }
+})
+bot.action("btn-6",(ctx)=>{
+  ctx.reply("این یک ربات تلگرامی فروشگاهی جهت تست ساخته شده است")
+})
+bot.action("btn-7",(ctx)=>{
+  ctx.reply("ایدی پشتیبانی : \n @")
 })
 
 // --- این خطوط را به جای bot.launch() اضافه کنید ---
