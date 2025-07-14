@@ -50,25 +50,32 @@ bot.action("btn-7",(ctx)=>{
   ctx.reply("ایدی پشتیبانی : \n @")
 })
 
-// --- این خطوط را به جای bot.launch() اضافه کنید ---
-const PORT = process.env.PORT || 3000; // Render پورت را در process.env.PORT قرار می‌دهد
+const { Telegraf } = require('telegraf');
+// فرض بر این است که PORT در جای دیگری تعریف شده است، مثلاً: const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // مطمئن شوید که این خط وجود دارد و به درستی تعریف شده است
 
-// URL واقعی سرویس Render شما که خودتان ارسال کردید:
-const WEBHOOK_URL = 'https://telegram-bot-v8u3.onrender.com/'; 
+const WEBHOOK_URL = 'https://telegram-bot-v8u3.onrender.com'; // در اینجا نیازی به اسلش انتهایی نیست، Telegraf در صورت نیاز با مسیر آن را اضافه می‌کند
+const bot = new Telegraf(process.env.BOT_TOKEN); // مطمئن شوید که BOT_TOKEN به درستی بارگذاری شده است
 
-// راه‌اندازی ربات در حالت وب‌هوک
+// هندلرهای ربات شما (bot.start, bot.help و غیره) در اینجا قرار می‌گیرند
+
+// راه اندازی ربات در حالت وب هوک
 bot.launch({
   webhook: {
-    domain: WEBHOOK_URL, // آدرس پایه برای وب‌هوک شما
-    port: PORT,           // پورتی که وب سرور شما روی آن گوش می‌دهد
-    // secretPath: '/telegraf-webhook' // (اختیاری) اگر می‌خواهید مسیر وب‌هوک شما امن‌تر باشد، می‌توانید این خط را فعال کنید
+    domain: WEBHOOK_URL,
+    port: PORT,
+    secretPath: '/telegraf-webhook' // این مسیر در URL وب هوک استفاده خواهد شد: WEBHOOK_URL/telegraf-webhook
   }
 }).then(() => {
   console.log('Bot started with webhook!');
-  // اگر از secretPath استفاده می‌کنید، باید Webhook را به تلگرام معرفی کنید:
-  // bot.telegram.setWebhook(WEBHOOK_URL + (bot.webhookSecretPath || ''));
-  // برای بیشتر موارد، bot.launch به خودی خود تنظیمات اولیه وب‌هوک در تلگرام را انجام می‌دهد.
-}).catch((err) => {
+  // حذف این خط: bot.telegram.setWebhook(WEBHOOK_URL + bot.webhookSecretPath || '');
+  // bot.launch({ webhook: ... }) خودش وب هوک را در تلگرام تنظیم می کند.
+}).catch(err => {
   console.error('Error starting bot:', err);
 });
-// --- پایان بخش اضافه شده ---
+
+// این خطوط برای توقف آرام سرور در صورت سیگنال‌های SIGINT/SIGTERM هستند.
+// در محیط‌هایی مانند Render که فرایندها توسط پلتفرم مدیریت می‌شوند، ممکن است
+// اینها کمتر حیاتی باشند اما داشتنشان ضرری ندارد.
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
