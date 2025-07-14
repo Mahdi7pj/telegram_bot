@@ -35,13 +35,13 @@ bot.action("btn-4",(ctx)=>{
   ctx.reply("@")
 })
 bot.action("btn-5",(ctx)=>{
-  ctx.reply("چه کمکی ز دستم برمیاد"),{
+  ctx.reply("چه کمکی از دستم برمیاد",{
     reply_markup:{
       inline_keyboard:[
         [{text:"درباره ما",callback_data:"btn-6"},{text:"ارتباط با پشتیبانی",callback_data:"btn-7"}]
       ]
     }
-  }
+  })
 })
 bot.action("btn-6",(ctx)=>{
   ctx.reply("این یک ربات تلگرامی فروشگاهی جهت تست ساخته شده است")
